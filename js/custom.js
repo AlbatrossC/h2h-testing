@@ -32,3 +32,27 @@ $(".owl-carousel").owlCarousel({
         }
     }
 });
+
+// Function to scroll to a specific section
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Add event listeners to each navigation link (like the one with `data-target`)
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default anchor behavior
+        const targetSection = this.getAttribute('data-target');
+        scrollToSection(targetSection);
+    });
+});
+
+// Add event listener to links like "Explore our services" (with href pointing to sections)
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent default anchor behavior
+        const targetSection = this.getAttribute('href').substring(1);  // Get the target section (remove '#')
+        scrollToSection(targetSection);  // Scroll to the target section
+    });
+});
